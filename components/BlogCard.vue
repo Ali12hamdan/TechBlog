@@ -13,9 +13,7 @@
   </div>
 </template>
 
-<script lang="ts" setu'>
-
-</script>
+<script lang="ts" setup></script>
 
 <style scoped>
 .card {
