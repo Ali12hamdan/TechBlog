@@ -17,13 +17,31 @@
       </NuxtLink>
     </div>
     <BlogsView>
-      <BlogCard :edit="true" />
-      <BlogCard :edit="true" />
+      <BlogCard
+        v-for="article in myArticles"
+        :edit="true"
+        :title="article.title"
+        :body="article.body"
+      />
     </BlogsView>
   </main>
 </template>
 <script lang="ts" setup>
 const userStore = useUserStore();
+const { data: articles } = await useFetch<Article[]>(
+  "https://jsonplaceholder.typicode.com/posts",
+  {
+    method: "get",
+  }
+);
+const myArticles = ref<Article[]>([]);
+if (articles.value) {
+  articles.value.forEach((article) => {
+    if (article.userId == 1) {
+      myArticles.value.push(article);
+    }
+  });
+}
 </script>
 
 <style scoped>

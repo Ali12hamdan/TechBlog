@@ -4,9 +4,9 @@
       <img src="../assets/res/bb.jpg" />
     </div>
     <div class="card__content">
-      <p class="card__title">Here's the Title of an Awesome Course</p>
+      <p class="card__title">{{ title }}</p>
       <div class="card__info">
-        <p class="text--medium">Ali Hamdan</p>
+        <p class="text--medium">{{ des }}</p>
         <p class="card__type text--medium">Android</p>
       </div>
     </div>
@@ -22,6 +22,19 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+});
+
+const des = computed(() => {
+  if (props.body.length > 30) return props.body.substring(0, 30);
+  return props.body;
 });
 </script>
 

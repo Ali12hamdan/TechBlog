@@ -42,14 +42,29 @@
           <NuxtLink to="/blogs"><button>More Articles</button></NuxtLink>
         </header>
         <BlogsView class=".blog-view">
-          <BlogCard :edit="false" />
-          <BlogCard :edit="false" />
-          <BlogCard :edit="false" />
+          <BlogCard
+            v-for="article in articles"
+            :edit="false"
+            :title="article.title"
+            :body="article.body"
+          />
         </BlogsView>
       </div>
     </div>
   </main>
 </template>
+
+<script lang="ts" setup>
+const { data: articles } = await useFetch<Article[]>(
+  "https://jsonplaceholder.typicode.com/posts",
+  {
+    method: "get",
+  }
+);
+if (articles.value && articles.value?.length > 3)
+  articles.value = articles.value?.slice(0, 3);
+</script>
+
 <style scoped>
 .container {
   background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);

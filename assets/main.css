@@ -25,3 +25,7 @@
     font-weight: bold;
     border-radius: 5px;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
