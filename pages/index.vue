@@ -42,9 +42,9 @@
           <NuxtLink to="/blogs"><button>More Articles</button></NuxtLink>
         </header>
         <BlogsView class=".blog-view">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          <BlogCard :edit="false" />
+          <BlogCard :edit="false" />
+          <BlogCard :edit="false" />
         </BlogsView>
       </div>
     </div>
@@ -71,6 +71,7 @@ img {
   border: solid 3px #003366;
   border-radius: 12px;
   margin-bottom: 20px;
+  padding: 0.5%;
 }
 .summary {
   width: 100%;

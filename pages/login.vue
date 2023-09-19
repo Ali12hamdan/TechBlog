@@ -31,7 +31,7 @@
                 type="text"
                 placeholder="Email Address"
                 required
-                ref="l_email"
+                ref="inputEmailLogin"
               />
             </div>
             <div class="field">
@@ -39,7 +39,7 @@
                 type="password"
                 placeholder="Password"
                 required
-                ref="l_pass"
+                ref="inputPassLogin"
               />
             </div>
             <div class="pass-link"><a href="#">Forgot password?</a></div>
@@ -61,7 +61,7 @@
                 type="text"
                 placeholder="Email Address"
                 required
-                ref="inputEmailLogin"
+                ref="inputEmail"
               />
             </div>
             <div class="field">
@@ -69,7 +69,7 @@
                 type="password"
                 placeholder="Password"
                 required
-                ref="inputPassLogin"
+                ref="inputPass"
               />
             </div>
 
@@ -90,8 +90,8 @@ import { useUserStore } from "~/stores/auth";
 definePageMeta({
   layout: "noheader",
 });
-
 const userStore = useUserStore();
+const router = useRouter();
 
 const loginTitle = ref({} as HTMLElement);
 const loginForm = ref({} as HTMLElement);
@@ -117,7 +117,7 @@ function onSignupLink(): void {
 }
 
 // Submit SignUp && Login
-function signUp(): void {
+async function signUp() {
   if (validateName(inputName.value.value)) {
     alert.value.style.display = "block";
     alert.value.innerText =
@@ -133,10 +133,33 @@ function signUp(): void {
     alert.value.style.display = "none";
     alert.value.innerText = "";
     //send request here...
-    navigateTo("./");
+    let req = {
+      name: inputName.value.value,
+      email: inputEmail.value.value,
+      password: inputPass.value.value,
+    };
+    const { data } = await useFetch<ResponseAuth>(
+      "http://localhost:3001/register",
+      {
+        method: "post",
+        body: req,
+      }
+    );
+    if (data.value) {
+      if (data.value.error == false) {
+        userStore.login(data.value);
+        router.replace({ name: "index" });
+      } else {
+        alert.value.style.display = "block";
+        alert.value.innerText = data.value.message;
+      }
+    } else {
+      alert.value.style.display = "block";
+      alert.value.innerText = "Unable to connect to server!!";
+    }
   }
 }
-function login(): void {
+async function login() {
   if (validateEmail(inputEmailLogin.value.value)) {
     alert.value.style.display = "block";
     alert.value.innerText = "The email is not valid!";
@@ -147,8 +170,29 @@ function login(): void {
   } else {
     alert.value.style.display = "none";
     alert.value.innerText = "";
-    //send request here...
-    navigateTo("./");
+    let req = {
+      email: inputEmailLogin.value.value,
+      password: inputPassLogin.value.value,
+    };
+    const { data } = await useFetch<ResponseAuth>(
+      "http://localhost:3001/login",
+      {
+        method: "post",
+        body: req,
+      }
+    );
+    if (data.value) {
+      if (data.value.error == false) {
+        userStore.login(data.value);
+        router.replace({ name: "index" });
+      } else {
+        alert.value.style.display = "block";
+        alert.value.innerText = data.value.message;
+      }
+    } else {
+      alert.value.style.display = "block";
+      alert.value.innerText = "Unable to connect to server!!";
+    }
   }
 }
 
@@ -161,10 +205,6 @@ function validateName(name: string) {
   const re = /^([a-zA-Z]+\s{1}){1,}[a-zA-Z]+$/;
   return !re.test(name) && name.length < 25 && name.length > 3;
 }
-
-onMounted(() => {
-  if (userStore.isLogin) navigateTo("./");
-});
 </script>
 
 <style scoped>
@@ -173,6 +213,7 @@ main {
   display: grid;
   place-items: center;
   background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+  padding-top: 0px;
 }
 ::selection {
   background: #1a75ff;
@@ -182,7 +223,9 @@ main {
   overflow: hidden;
   max-width: 390px;
   background: #fff;
-  padding: 30px;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   border-radius: 15px;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
 }
@@ -203,7 +246,7 @@ main {
   height: 50px;
   width: 100%;
   overflow: hidden;
-  margin: 30px 0 10px 0;
+  margin: 17px 0 10px 0;
   justify-content: space-between;
   border: 1px solid lightgrey;
   border-radius: 15px;
@@ -269,7 +312,7 @@ input[type="radio"] {
 .form-inner form .field {
   height: 50px;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 13px;
 }
 .form-inner form .field input {
   height: 100%;
@@ -298,7 +341,7 @@ form .field input:focus::placeholder {
 }
 .form-inner form .signup-link {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 17px;
 }
 .form-inner form .pass-link a,
 .form-inner form .signup-link a {
@@ -351,8 +394,9 @@ form .btn input[type="submit"] {
 
 .alert {
   display: none;
+  font-size: x-small;
   text-align: left;
-  margin-top: 30px;
+  margin-top: 4px;
   padding-left: 10px;
   color: rgba(255, 0, 0, 0.753);
   border-left: 3px solid rgba(255, 0, 0, 0.753);

@@ -10,10 +10,20 @@
         <p class="card__type text--medium">Android</p>
       </div>
     </div>
+    <NuxtLink class="text--medium" to="/content-editor" v-if="edit">
+      Edit
+    </NuxtLink>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps({
+  edit: {
+    type: Boolean,
+    required: true,
+  },
+});
+</script>
 
 <style scoped>
 .card {
@@ -74,6 +84,14 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
+}
+
+a {
+  text-align: center;
+  padding: 4px;
+  background-color: #0059b3;
+  color: white;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 1000px) {

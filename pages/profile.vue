@@ -1,28 +1,30 @@
 <template>
   <main class="container">
     <div class="info-profile">
-      <div style="display: flex; align-items: center; padding-left: 1.5%">
+      <div class="h-profile">
         <img class="img-profile" src="../assets/res/aa.jpg" />
         <div class="details-profile">
-          <h2>Ali Hamdan</h2>
-          <h4>example@gmail.com</h4>
+          <h2>{{ userStore.user.name }}</h2>
+          <h4>{{ userStore.user.email }}</h4>
           <div class="num-content">
             <label><b>Articles: 2</b></label>
           </div>
         </div>
       </div>
 
-      <NuxtLink to="/content-editor">
+      <NuxtLink class="edit" to="/content-editor">
         <button class="create-btn">Create New Content</button>
       </NuxtLink>
     </div>
     <BlogsView>
-      <BlogCard />
-      <BlogCard />
+      <BlogCard :edit="true" />
+      <BlogCard :edit="true" />
     </BlogsView>
   </main>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const userStore = useUserStore();
+</script>
 
 <style scoped>
 .container {
@@ -42,6 +44,16 @@
   line-height: 2;
   background-color: white;
   border-left: #003366 solid 6px;
+}
+.h-profile {
+  display: flex;
+  align-items: center;
+  padding-left: 1.5%;
+  padding-right: 8%;
+}
+.edit {
+  text-align: right;
+  flex: auto;
 }
 .img-profile {
   width: 100px;
@@ -94,8 +106,15 @@
   .info-profile {
     border-left: #003366 solid 4px;
   }
+
+  .details-profile h2 {
+    font-size: large;
+  }
+  .details-profile h4 {
+    font-size: medium;
+  }
 }
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 520px) {
   .num-content {
     width: 100%;
     display: grid;

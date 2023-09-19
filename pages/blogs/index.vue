@@ -1,9 +1,9 @@
 <template>
   <main class="container">
     <BlogsView>
-      <BlogCard />
-      <BlogCard />
-      <BlogCard />
+      <BlogCard :edit="false" />
+      <BlogCard :edit="false" />
+      <BlogCard :edit="false" />
     </BlogsView>
   </main>
 </template>

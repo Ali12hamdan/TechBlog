@@ -2,11 +2,11 @@
   <div id="header">
     <h2>{{ getTitle }}</h2>
     <div class="tool-bar">
-      <ul class="tabs" v-if="userStore.isLogin">
+      <ul class="tabs" v-if="userStore.isLoginUser">
         <li class="tab" v-if="isNotProfile">
           <NuxtLink to="/profile">Profile</NuxtLink>
         </li>
-        <li class="tab">Logout</li>
+        <li class="tab" @click="userStore.logout">Logout</li>
       </ul>
       <div class="login-div" v-else>
         <NuxtLink to="/login">
