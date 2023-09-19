@@ -7,12 +7,11 @@
       <p class="card__title">{{ title }}</p>
       <div class="card__info">
         <p class="text--medium">{{ des }}</p>
-        <p class="card__type text--medium">Android</p>
+        <p class="card__type text--medium" to="/content-editor" v-if="edit">
+          <NuxtLink>Edit</NuxtLink>
+        </p>
       </div>
     </div>
-    <NuxtLink class="text--medium" to="/content-editor" v-if="edit">
-      Edit
-    </NuxtLink>
   </div>
 </template>
 
@@ -70,6 +69,7 @@ const des = computed(() => {
 
 .card__content {
   padding: 20px;
+  text-align: left;
 }
 
 .card__title {
