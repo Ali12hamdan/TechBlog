@@ -16,18 +16,49 @@
       <div class="box-editor">
         <div class="article-editor">
           <textarea
+            v-model="title"
             style="font-weight: bold"
             placeholder="Write title here"
           ></textarea>
-          <textarea placeholder="Write article here"></textarea>
-          <button class="create-btn">Create</button>
+          <textarea v-model="body" placeholder="Write article here"></textarea>
+          <button class="create-btn" @click="create">Create</button>
+          <Alert style="margin: auto; width: fit-content" :msg="msg"></Alert>
         </div>
       </div>
     </div>
   </main>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const title = ref("");
+const body = ref("");
+const msg = ref("");
+
+async function create() {
+  if (title.value.length < 15) {
+    msg.value = "Title must be at least 15 character";
+  } else if (body.value.length < 30) {
+    msg.value = "Article body must be at least 30 character";
+  } else {
+    let req = {
+      title: title.value,
+      body: body.value,
+      userId: 1,
+    };
+    const { data } = await useFetch<Article>(
+      "https://jsonplaceholder.typicode.com/posts",
+      {
+        method: "post",
+        body: JSON.stringify(req),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    msg.value = "The article was created successfully";
+  }
+}
+</script>
 
 <style scoped>
 .container {

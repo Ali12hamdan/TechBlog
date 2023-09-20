@@ -101,9 +101,6 @@ const des = computed(() => {
 
 a {
   text-align: center;
-  padding: 4px;
-  background-color: #0059b3;
-  color: white;
   text-decoration: none;
 }
 

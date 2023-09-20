@@ -79,7 +79,7 @@
             </div>
           </form>
         </div>
-        <p class="alert" ref="alert">Name Too Short</p>
+        <Alert :msg="msg" />
       </div>
     </div>
   </main>
@@ -101,8 +101,7 @@ const inputEmail = ref({} as HTMLInputElement);
 const inputPass = ref({} as HTMLInputElement);
 const inputEmailLogin = ref({} as HTMLInputElement);
 const inputPassLogin = ref({} as HTMLInputElement);
-const alert = ref({} as HTMLParagraphElement);
-
+const msg = ref("");
 // Change Style
 function toLogin(): void {
   loginTitle.value.style.marginLeft = "0%";
@@ -119,19 +118,15 @@ function onSignupLink(): void {
 // Submit SignUp && Login
 async function signUp() {
   if (validateName(inputName.value.value)) {
-    alert.value.style.display = "block";
-    alert.value.innerText =
+    msg.value =
       "The name must be between 3-25 character and contain a-z A-Z only";
   } else if (validateEmail(inputEmail.value.value)) {
-    alert.value.style.display = "block";
-    alert.value.innerText = "The email is not valid!";
+    msg.value = "The email is not valid!";
   } else if (inputPass.value.value.length < 6) {
-    alert.value.style.display = "block";
-    alert.value.innerText =
+    msg.value =
       "The password is too short!\nPassword must be at least 6 character";
   } else {
-    alert.value.style.display = "none";
-    alert.value.innerText = "";
+    msg.value = "";
     //send request here...
     let req = {
       name: inputName.value.value,
@@ -150,26 +145,21 @@ async function signUp() {
         userStore.login(data.value);
         router.replace({ name: "index" });
       } else {
-        alert.value.style.display = "block";
-        alert.value.innerText = data.value.message;
+        msg.value = data.value.message;
       }
     } else {
-      alert.value.style.display = "block";
-      alert.value.innerText = "Unable to connect to server!!";
+      msg.value = "Unable to connect to server!!";
     }
   }
 }
 async function login() {
   if (validateEmail(inputEmailLogin.value.value)) {
-    alert.value.style.display = "block";
-    alert.value.innerText = "The email is not valid!";
+    msg.value = "The email is not valid!";
   } else if (inputPassLogin.value.value.length < 6) {
-    alert.value.style.display = "block";
-    alert.value.innerText =
+    msg.value =
       "The password is too short!\nPassword must be at least 6 character";
   } else {
-    alert.value.style.display = "none";
-    alert.value.innerText = "";
+    msg.value = "";
     let req = {
       email: inputEmailLogin.value.value,
       password: inputPassLogin.value.value,
@@ -186,12 +176,10 @@ async function login() {
         userStore.login(data.value);
         router.replace({ name: "index" });
       } else {
-        alert.value.style.display = "block";
-        alert.value.innerText = data.value.message;
+        msg.value = data.value.message;
       }
     } else {
-      alert.value.style.display = "block";
-      alert.value.innerText = "Unable to connect to server!!";
+      msg.value = "Unable to connect to server!!";
     }
   }
 }
@@ -390,15 +378,5 @@ form .btn input[type="submit"] {
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
-}
-
-.alert {
-  display: none;
-  font-size: x-small;
-  text-align: left;
-  margin-top: 4px;
-  padding-left: 10px;
-  color: rgba(255, 0, 0, 0.753);
-  border-left: 3px solid rgba(255, 0, 0, 0.753);
 }
 </style>
