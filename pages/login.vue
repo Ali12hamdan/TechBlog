@@ -42,7 +42,8 @@
                 ref="inputPassLogin"
               />
             </div>
-            <div class="pass-link"><a href="#">Forgot password?</a></div>
+            <!--div class="pass-link"><a href="#">Forgot password?</a></div-->
+            <br />
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Login" />
@@ -165,7 +166,7 @@ async function login() {
       password: inputPassLogin.value.value,
     };
     const { data } = await useFetch<ResponseAuth>(
-      "http://localhost:3001/login",
+      "http://192.168.205.189:3001/login",
       {
         method: "post",
         body: req,

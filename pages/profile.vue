@@ -17,12 +17,7 @@
       </NuxtLink>
     </div>
     <BlogsView>
-      <BlogCard
-        v-for="article in myArticles"
-        :edit="true"
-        :title="article.title"
-        :body="article.body"
-      />
+      <BlogCard v-for="article in myArticles" :edit="true" :article="article" />
     </BlogsView>
   </main>
 </template>
@@ -50,7 +45,7 @@ if (articles.value) {
   padding-right: 5%;
   background-color: #e4e9ed;
   height: 100%;
-  overflow-y: inherit;
+  overflow-y: auto;
 }
 .info-profile {
   display: flex;
@@ -60,8 +55,9 @@ if (articles.value) {
   padding: 1.2%;
   margin-top: 2%;
   line-height: 2;
+  border-radius: 12px;
   background-color: white;
-  border-left: #003366 solid 6px;
+  border: #003366 solid 2px;
 }
 .h-profile {
   display: flex;
@@ -121,10 +117,6 @@ if (articles.value) {
     height: 86px;
     border-radius: 43px;
   }
-  .info-profile {
-    border-left: #003366 solid 4px;
-  }
-
   .details-profile h2 {
     font-size: large;
   }
@@ -141,9 +133,6 @@ if (articles.value) {
     width: 76px;
     height: 76px;
     border-radius: 38px;
-  }
-  .info-profile {
-    border-left: #003366 solid 2px;
   }
 }
 </style>

@@ -1,15 +1,18 @@
 <template>
   <div class="card">
     <div class="card__image-container">
-      <img src="../assets/res/bb.jpg" />
+      <img src="../assets/res/article.png" />
     </div>
     <div class="card__content">
-      <p class="card__title">{{ title }}</p>
       <div class="card__info">
-        <p class="text--medium">{{ des }}</p>
-        <p class="card__type text--medium" to="/content-editor" v-if="edit">
-          <NuxtLink>Edit</NuxtLink>
-        </p>
+        <p class="card__title">{{ article.title }}</p>
+        <p class="card__des text--medium">{{ des }}</p>
+      </div>
+      <div class="card__options" v-if="edit">
+        <NuxtLink to="/content-editor" class="card__option text--medium">
+          <p v-if="edit">Edit</p>
+        </NuxtLink>
+        <p class="card__option text--medium" @click="deleteArticle">Delete</p>
       </div>
     </div>
   </div>
@@ -21,19 +24,29 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  body: {
-    type: String,
+  article: {
+    type: Object as PropType<Article>,
     required: true,
   },
 });
-
+async function deleteArticle() {
+  // const { data } = await useFetch(
+  //   "https://jsonplaceholder.typicode.com/posts/1",
+  //   {
+  //     method: "delete",
+  //   }
+  // );
+}
 const des = computed(() => {
-  if (props.body.length > 30) return props.body.substring(0, 30);
-  return props.body;
+  let i: number = 100;
+  let desc: String = "";
+  if (props.article.body.length > 100) {
+    do {
+      i--;
+      desc = props.article.body.substring(0, i);
+    } while (props.article.body[i] != " ");
+  }
+  return desc + "...";
 });
 </script>
 
@@ -44,7 +57,10 @@ const des = computed(() => {
   flex-direction: column;
   background-color: white;
   cursor: pointer;
+  border-radius: 12px;
   transition: all 0.3s ease 0s;
+
+  border: #003366 solid 2px;
 }
 
 .card:hover {
@@ -68,28 +84,36 @@ const des = computed(() => {
 }
 
 .card__content {
+  height: 100%;
   padding: 20px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .card__title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: bold;
   font-family: "Open Sans", sans-serif;
 }
-
+.card__des {
+  margin-bottom: 15px;
+}
 .card__info {
+  flex-grow: 1;
+}
+.card__options {
   display: flex;
-  align-self: end;
-  align-items: center;
+  justify-content: right;
 }
 
-.card__type {
-  margin-left: auto;
+.card__option {
+  margin-left: 7px;
   padding: 5px 20px;
   background-color: #0059b3;
   border-radius: 20px;
   color: white;
+  align-self: center;
 }
 
 .text--medium {
@@ -98,7 +122,10 @@ const des = computed(() => {
   line-height: 20px;
   font-weight: 400;
 }
-
+img {
+  height: 75%;
+  object-fit: contain;
+}
 a {
   text-align: center;
   text-decoration: none;

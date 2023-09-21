@@ -45,8 +45,7 @@
           <BlogCard
             v-for="article in articles"
             :edit="false"
-            :title="article.title"
-            :body="article.body"
+            :article="article"
           />
         </BlogsView>
       </div>

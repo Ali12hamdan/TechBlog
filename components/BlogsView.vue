@@ -16,7 +16,7 @@
   padding: 60px 0;
   background-color: #e4e9ed;
   overflow-y: inherit;
-  height: 100vh;
+  height: 100%;
 }
 .cards {
   height: fit-content;
