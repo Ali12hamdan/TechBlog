@@ -16,27 +16,11 @@
         <button class="create-btn">Create New Content</button>
       </NuxtLink>
     </div>
-    <BlogsView>
-      <BlogCard v-for="article in myArticles" :edit="true" :article="article" />
-    </BlogsView>
+    <BlogsView :type="'profile'" />
   </main>
 </template>
 <script lang="ts" setup>
 const userStore = useUserStore();
-const { data: articles } = await useFetch<Article[]>(
-  "https://jsonplaceholder.typicode.com/posts",
-  {
-    method: "get",
-  }
-);
-const myArticles = ref<Article[]>([]);
-if (articles.value) {
-  articles.value.forEach((article) => {
-    if (article.userId == 1) {
-      myArticles.value.push(article);
-    }
-  });
-}
 </script>
 
 <style scoped>

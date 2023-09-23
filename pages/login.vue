@@ -166,7 +166,7 @@ async function login() {
       password: inputPassLogin.value.value,
     };
     const { data } = await useFetch<ResponseAuth>(
-      "http://192.168.205.189:3001/login",
+      "http://localhost:3001/login",
       {
         method: "post",
         body: req,

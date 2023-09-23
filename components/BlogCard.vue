@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="openArticle">
     <div class="card__image-container">
       <img src="../assets/res/article.png" />
     </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+const route = useRouter();
 const props = defineProps({
   edit: {
     type: Boolean,
@@ -29,6 +30,15 @@ const props = defineProps({
     required: true,
   },
 });
+function openArticle() {
+  route.push({
+    params: {
+      id: props.article.id,
+    },
+    name: "blogs-id",
+  });
+}
+
 async function deleteArticle() {
   // const { data } = await useFetch(
   //   "https://jsonplaceholder.typicode.com/posts/1",

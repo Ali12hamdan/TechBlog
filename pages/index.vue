@@ -41,28 +41,13 @@
           <h2>Popular Articles</h2>
           <NuxtLink to="/blogs"><button>More Articles</button></NuxtLink>
         </header>
-        <BlogsView class=".blog-view">
-          <BlogCard
-            v-for="article in articles"
-            :edit="false"
-            :article="article"
-          />
-        </BlogsView>
+        <BlogsView class=".blog-view" :type="'popular'" />
       </div>
     </div>
   </main>
 </template>
 
-<script lang="ts" setup>
-const { data: articles } = await useFetch<Article[]>(
-  "https://jsonplaceholder.typicode.com/posts",
-  {
-    method: "get",
-  }
-);
-if (articles.value && articles.value?.length > 3)
-  articles.value = articles.value?.slice(0, 3);
-</script>
+<script lang="ts" setup></script>
 
 <style scoped>
 .container {

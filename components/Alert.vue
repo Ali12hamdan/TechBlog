@@ -17,7 +17,6 @@ onUpdated(() => {
 </script>
 <style scoped>
 .alert {
-  display: none;
   font-size: x-small;
   text-align: left;
   margin-top: 4px;

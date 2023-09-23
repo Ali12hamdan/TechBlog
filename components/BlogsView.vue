@@ -1,12 +1,35 @@
 <template>
   <div class="blog-view">
     <section class="cards">
-      <slot />
+      <BlogCard v-for="article in articles" :edit="false" :article="article" />
     </section>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps({
+  type: {
+    type: String,
+    required: false,
+  },
+});
+const articlesStore = useArticlesStore();
+if (articlesStore.getArticles.length == 0) {
+  await useFetch<Article[]>("https://jsonplaceholder.typicode.com/posts", {
+    method: "get",
+    onResponse({ request, response, options }) {
+      articlesStore.updateArticles(response._data);
+      console.log("request");
+    },
+  });
+}
+const articles = ref(articlesStore.getArticles);
+if (props.type == "profile") {
+  articles.value = articles.value.filter((obj) => obj.userId === 1);
+} else if (props.type == "popular") {
+  if (articles.value.length > 3) articles.value = articles.value?.slice(0, 3);
+}
+</script>
 
 <style scoped>
 .blog-view {

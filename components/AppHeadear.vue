@@ -21,7 +21,7 @@
 const userStore = useUserStore();
 const getTitle = computed(() => {
   let routeName = useRoute().name as string;
-  if (routeName == "index") {
+  if (routeName == "index" || routeName == "blogs-id") {
     routeName = "TechBlog";
   } else if (routeName == "content-editor") {
     routeName = "Editor";
