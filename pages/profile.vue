@@ -20,6 +20,9 @@
   </main>
 </template>
 <script lang="ts" setup>
+useHead({
+  title: "TechBlog - Profile",
+});
 const userStore = useUserStore();
 </script>
 

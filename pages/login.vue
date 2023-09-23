@@ -88,6 +88,9 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "~/stores/auth";
+useHead({
+  title: "TechBlog - Login",
+});
 definePageMeta({
   layout: "noheader",
 });

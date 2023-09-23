@@ -47,7 +47,11 @@
   </main>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: "TechBlog",
+});
+</script>
 
 <style scoped>
 .container {

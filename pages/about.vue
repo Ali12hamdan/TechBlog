@@ -8,6 +8,12 @@
   </main>
 </template>
 
+<script lang="ts" setup>
+useHead({
+  title: "TechBlog - About",
+});
+</script>
+
 <style scoped>
 .container {
   padding: 3%;

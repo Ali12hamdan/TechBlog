@@ -22,7 +22,7 @@
           ></textarea>
           <textarea v-model="body" placeholder="Write article here"></textarea>
           <button class="create-btn" @click="create">Create</button>
-          <Alert style="margin: auto; width: fit-content" :msg="msg"></Alert>
+          <Alert class="alert" :msg="msg"></Alert>
         </div>
       </div>
     </div>
@@ -30,6 +30,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "TechBlog - Editor",
+});
 const title = ref("");
 const body = ref("");
 const msg = ref("");
@@ -53,9 +56,17 @@ async function create() {
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
+        onResponse({ request, response, options }) {
+          msg.value = "The article was created successfully";
+        },
+        onResponseError() {
+          msg.value = "Response Error!!";
+        },
+        onRequestError() {
+          msg.value = "Request Error!!";
+        },
       }
     );
-    msg.value = "The article was created successfully";
   }
 }
 </script>
@@ -67,15 +78,20 @@ async function create() {
   height: 100vh;
   overflow-y: inherit;
 }
+.editor {
+  margin-top: 30px;
+  height: fit-content;
+  background-color: white;
+  border-radius: 12px;
+  border: 4px solid #003366;
+}
 .col {
   width: 70%;
-  padding: 1%;
 }
 header {
   display: flex;
   justify-content: space-between;
-  border: 4px solid #003366;
-  border-radius: 10px 10px 0px 0px;
+  border-bottom: 4px solid #003366;
   padding: 1%;
 }
 .tab-editor {
@@ -84,8 +100,6 @@ header {
 .box-editor {
   text-align: center;
   height: max-content;
-  border: 4px solid #003366;
-  border-radius: 0px 0px 3px 3px;
   border-top: 0px;
 }
 .article-editor {
@@ -115,11 +129,11 @@ textarea {
   border: unset;
   font-size: 18px;
 }
-
-/* Preview Style*/
-.box-preview {
-  height: 80vh;
-  border: 4px solid #003366;
-  border-top: 0px;
+.alert {
+  margin: auto;
+  width: fit-content;
+  font-size: medium;
+  border-left: 0px;
+  padding-left: 0px;
 }
 </style>

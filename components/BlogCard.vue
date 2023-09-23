@@ -9,10 +9,16 @@
         <p class="card__des text--medium">{{ des }}</p>
       </div>
       <div class="card__options" v-if="edit">
-        <NuxtLink to="/content-editor" class="card__option text--medium">
+        <NuxtLink
+          to="/content-editor"
+          class="card__option text--medium"
+          @click.stop
+        >
           <p v-if="edit">Edit</p>
         </NuxtLink>
-        <p class="card__option text--medium" @click="deleteArticle">Delete</p>
+        <p class="card__option text--medium" @click.stop="deleteArticle">
+          Delete
+        </p>
       </div>
     </div>
   </div>

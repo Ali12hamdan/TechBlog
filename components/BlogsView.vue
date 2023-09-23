@@ -1,7 +1,18 @@
 <template>
   <div class="blog-view">
     <section class="cards">
-      <BlogCard v-for="article in articles" :edit="false" :article="article" />
+      <BlogCard
+        v-if="props.type != 'profile'"
+        v-for="article in articles"
+        :edit="false"
+        :article="article"
+      />
+      <BlogCard
+        v-else
+        v-for="article in articles"
+        :edit="true"
+        :article="article"
+      />
     </section>
   </div>
 </template>
