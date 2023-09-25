@@ -1,17 +1,20 @@
 <template>
+  <p class="msg" v-if="showMsg">The article has been deleted.</p>
   <div class="blog-view">
     <section class="cards">
       <BlogCard
         v-if="props.type != 'profile'"
         v-for="article in articles"
-        :edit="false"
+        :options="false"
         :article="article"
+        @toggleMsg="toggleMsg"
       />
       <BlogCard
         v-else
         v-for="article in articles"
-        :edit="true"
+        :options="true"
         :article="article"
+        @toggleMsg="toggleMsg"
       />
     </section>
   </div>
@@ -24,22 +27,45 @@ const props = defineProps({
     required: false,
   },
 });
+const showMsg = ref(false);
+function toggleMsg() {
+  if (showMsg.value == false) {
+    scrollToTop();
+  }
+  showMsg.value = !showMsg.value;
+}
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+const userStore = useUserStore();
 const articlesStore = useArticlesStore();
 if (articlesStore.getArticles.length == 0) {
   await useFetch<Article[]>("https://jsonplaceholder.typicode.com/posts", {
     method: "get",
     onResponse({ request, response, options }) {
       articlesStore.updateArticles(response._data);
-      console.log("request");
+      console.log("Posts Request");
     },
   });
 }
 const articles = ref(articlesStore.getArticles);
-if (props.type == "profile") {
-  articles.value = articles.value.filter((obj) => obj.userId === 1);
-} else if (props.type == "popular") {
-  if (articles.value.length > 3) articles.value = articles.value?.slice(0, 3);
-}
+
+onMounted(() => {
+  const user = userStore.authUser;
+  if (props.type == "profile") {
+    articles.value = articles.value?.filter((obj) => obj.userId === user.id);
+  } else if (props.type == "popular") {
+    if (articles.value.length > 3) articles.value = articles.value?.slice(0, 3);
+  }
+});
+onUpdated(() => {
+  if (showMsg.value) {
+    setTimeout(() => {
+      toggleMsg();
+    }, 2000);
+  }
+});
 </script>
 
 <style scoped>
@@ -59,7 +85,12 @@ if (props.type == "profile") {
   grid-template-columns: repeat(12, minmax(auto, 60px));
   grid-gap: 40px;
 }
-
+.msg {
+  text-align: center;
+  color: lightseagreen;
+  font-weight: bold;
+  font-size: larger;
+}
 @media only screen and (max-width: 700px) {
   .blog-view {
     grid-gap: 20px;

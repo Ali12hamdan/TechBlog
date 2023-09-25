@@ -44,6 +44,7 @@
         <BlogsView class=".blog-view" :type="'popular'" />
       </div>
     </div>
+    <NuxtLink class="about" to="/about">About us</NuxtLink>
   </main>
 </template>
 
@@ -105,6 +106,11 @@ header a button:hover {
 }
 .blog-view {
   height: fit-content;
+}
+
+.about {
+  color: white;
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1000px) {

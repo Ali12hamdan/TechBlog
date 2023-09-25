@@ -8,17 +8,29 @@
         <p class="card__title">{{ article.title }}</p>
         <p class="card__des text--medium">{{ des }}</p>
       </div>
-      <div class="card__options" v-if="edit">
+      <div class="card__options" v-if="options">
         <NuxtLink
-          to="/content-editor"
+          :to="`/content-editor/${props.article.id}`"
           class="card__option text--medium"
           @click.stop
         >
-          <p v-if="edit">Edit</p>
+          <p v-if="options">Edit</p>
         </NuxtLink>
-        <p class="card__option text--medium" @click.stop="deleteArticle">
+        <p class="card__option text--medium" @click.stop="deleteConfirm = true">
           Delete
         </p>
+      </div>
+      <div class="confirm" v-if="deleteConfirm">
+        <p class="p-confirm">Are you sure you want to delete this article?</p>
+        <div class="btns-confirm">
+          <button @click.stop="deleteConfirm = false">Cancel</button>
+          <button
+            style="border-color: brown; color: brown"
+            @click.stop="deleteArticle"
+          >
+            Confirm
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +39,7 @@
 <script lang="ts" setup>
 const route = useRouter();
 const props = defineProps({
-  edit: {
+  options: {
     type: Boolean,
     required: true,
   },
@@ -36,6 +48,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["toggleMsg"]);
+const deleteConfirm = ref(false);
+
 function openArticle() {
   route.push({
     params: {
@@ -46,13 +62,18 @@ function openArticle() {
 }
 
 async function deleteArticle() {
-  // const { data } = await useFetch(
-  //   "https://jsonplaceholder.typicode.com/posts/1",
-  //   {
-  //     method: "delete",
-  //   }
-  // );
+  const { data } = await useFetch<Article>(
+    "https://jsonplaceholder.typicode.com/posts/" + props.article.id,
+    {
+      method: "delete",
+      onResponse({ request, response, options }) {
+        deleteConfirm.value = false;
+        emit("toggleMsg");
+      },
+    }
+  );
 }
+
 const des = computed(() => {
   let i: number = 100;
   let desc: String = "";
@@ -75,7 +96,6 @@ const des = computed(() => {
   cursor: pointer;
   border-radius: 12px;
   transition: all 0.3s ease 0s;
-
   border: #003366 solid 2px;
 }
 
@@ -131,7 +151,29 @@ const des = computed(() => {
   color: white;
   align-self: center;
 }
-
+.confirm {
+  margin-top: 5px;
+  padding: 10px;
+  border: solid 1px brown;
+  border-radius: 15px;
+}
+.p-confirm {
+  font-size: 13px;
+}
+.btns-confirm {
+  display: flex;
+  justify-content: right;
+}
+.btns-confirm * {
+  margin-left: 7px;
+  padding: 5px 10px;
+  font-size: 11px;
+  background-color: white;
+  border-color: #0059b3;
+  border-radius: 20px;
+  color: black;
+  cursor: pointer;
+}
 .text--medium {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;

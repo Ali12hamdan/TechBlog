@@ -31,6 +31,7 @@
                 type="text"
                 placeholder="Email Address"
                 required
+                autocomplete="username"
                 ref="inputEmailLogin"
               />
             </div>
@@ -38,6 +39,7 @@
               <input
                 type="password"
                 placeholder="Password"
+                autocomplete="current-password"
                 required
                 ref="inputPassLogin"
               />
@@ -61,6 +63,7 @@
               <input
                 type="text"
                 placeholder="Email Address"
+                autocomplete="username"
                 required
                 ref="inputEmail"
               />
@@ -69,6 +72,7 @@
               <input
                 type="password"
                 placeholder="Password"
+                autocomplete="current-password"
                 required
                 ref="inputPass"
               />
@@ -106,6 +110,11 @@ const inputPass = ref({} as HTMLInputElement);
 const inputEmailLogin = ref({} as HTMLInputElement);
 const inputPassLogin = ref({} as HTMLInputElement);
 const msg = ref("");
+
+onMounted(() => {
+  if (userStore.isLoginUser) router.replace({ name: "index" });
+});
+
 // Change Style
 function toLogin(): void {
   loginTitle.value.style.marginLeft = "0%";

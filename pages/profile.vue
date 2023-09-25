@@ -7,14 +7,15 @@
           <h2>{{ userStore.user.name }}</h2>
           <h4>{{ userStore.user.email }}</h4>
           <div class="num-content">
-            <label><b>Articles: 2</b></label>
+            <label style="display: none"><b>Articles: 2</b></label>
           </div>
         </div>
       </div>
-
-      <NuxtLink class="edit" to="/content-editor">
-        <button class="create-btn">Create New Content</button>
-      </NuxtLink>
+      <div class="edit">
+        <NuxtLink to="/content-editor">
+          <button class="create-btn">Create New Content</button>
+        </NuxtLink>
+      </div>
     </div>
     <BlogsView :type="'profile'" />
   </main>

@@ -36,7 +36,7 @@ definePageMeta({
 
 const articlesStore = useArticlesStore();
 const route = useRoute();
-if (articlesStore.getArticles.length == 0) {
+if (articlesStore.articles.length == 0) {
   await useFetch<Article[]>("https://jsonplaceholder.typicode.com/posts", {
     method: "get",
     onResponse({ request, response, options }) {

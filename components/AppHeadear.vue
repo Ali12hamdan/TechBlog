@@ -2,11 +2,11 @@
   <div id="header">
     <h2>{{ getTitle }}</h2>
     <div class="tool-bar">
-      <ul class="tabs" v-if="userStore.isLoginUser">
+      <ul class="tabs" v-if="login">
         <li class="tab" v-if="isNotProfile">
           <NuxtLink to="/profile">Profile</NuxtLink>
         </li>
-        <li class="tab" @click="userStore.logout">Logout</li>
+        <li class="tab" @click="logout">Logout</li>
       </ul>
       <div class="login-div" v-else>
         <NuxtLink to="/login">
@@ -19,18 +19,31 @@
 
 <script lang="ts" setup>
 const userStore = useUserStore();
+const login = ref(false);
+
+function logout() {
+  userStore.logout();
+  login.value = false;
+}
+
 const getTitle = computed(() => {
   let routeName = useRoute().name as string;
   if (routeName == "index" || routeName == "blogs-id") {
     routeName = "TechBlog";
   } else if (routeName == "content-editor") {
-    routeName = "Editor";
+    routeName = "Editor - Create";
+  } else if (routeName == "content-editor-id") {
+    routeName = "Editor - Edit";
   }
   return routeName[0].charAt(0).toUpperCase() + routeName.slice(1);
 });
 const isNotProfile = computed(() => {
   if (getTitle.value != "Profile") return true;
   return false;
+});
+
+onMounted(() => {
+  login.value = userStore.isLoginUser;
 });
 </script>
 
