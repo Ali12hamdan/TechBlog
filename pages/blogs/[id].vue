@@ -46,7 +46,35 @@ if (article.value == undefined)
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 useHead({
   title: "TechBlog - Blog",
-  meta: [{ name: article.value.title, content: article.value.body }],
+  meta: [
+    { hid: "description", name: "description", content: article.value.body },
+    { hid: "og:title", property: "og:title", content: article.value.title },
+    //{ hid: "og:url", property: "og:url", content:  },
+    {
+      hid: "og:description",
+      property: "og:description",
+      content: article.value.body,
+    },
+    //{hid: "og:image",property: "og:image",content: process.env.baseUrl + ogImage,},
+
+    // telegram card
+    {
+      hid: "telegram:title",
+      name: "telegram:title",
+      content: article.value.title,
+    },
+    //{ hid: "telegram:url", name: "telegram:url", content:  },
+    {
+      hid: "telegram:description",
+      name: "telegram:description",
+      content: article.value.body,
+    },
+    // // {
+    // //   hid: "telegram:image",
+    // //   name: "telegram:image",
+    // //   content: process.env.baseUrl + ogImage,
+    // // },
+  ],
 });
 </script>
 
