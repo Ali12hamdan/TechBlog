@@ -57,7 +57,7 @@ useHead({
     {
       hid: "og:image",
       property: "og:image",
-      content: require(`~/assets/article.png`),
+      content: "https://tech-blog-kappa-nine.vercel.app/assets/favicon.png",
     },
 
     // telegram card
@@ -75,7 +75,7 @@ useHead({
     {
       hid: "telegram:image",
       name: "telegram:image",
-      content: require(`~/assets/article.png`),
+      content: "https://tech-blog-kappa-nine.vercel.app/assets/favicon.png",
     },
   ],
 });
