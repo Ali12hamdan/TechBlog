@@ -2,7 +2,7 @@
   <main class="container">
     <div class="info-profile">
       <div class="h-profile">
-        <img class="img-profile" src="../assets/res/aa.jpg" />
+        <img class="img-profile" src="../assets/res/bb.jpg" />
         <div class="details-profile">
           <h2>{{ userStore.user.name }}</h2>
           <h4>{{ userStore.user.email }}</h4>
