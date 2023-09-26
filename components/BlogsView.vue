@@ -54,11 +54,10 @@ const articles = ref(articlesStore.getArticles);
 onMounted(() => {
   const user = userStore.authUser;
   if (props.type == "profile") {
-    articles.value = articles.value?.filter((obj) => obj.userId === user.id);
+    articles.value = articles.value.filter((obj) => obj.userId === user.id);
   } else if (props.type == "popular") {
     if (articles.value.length > 3) {
-      articles.value = articles.value?.slice(0, 3);
-      console.log("popular");
+      articles.value = articles.value.slice(0, 3);
     }
   }
 });
