@@ -56,7 +56,10 @@ onMounted(() => {
   if (props.type == "profile") {
     articles.value = articles.value?.filter((obj) => obj.userId === user.id);
   } else if (props.type == "popular") {
-    if (articles.value.length > 3) articles.value = articles.value?.slice(0, 3);
+    if (articles.value.length > 3) {
+      articles.value = articles.value?.slice(0, 3);
+      console.log("popular");
+    }
   }
 });
 onUpdated(() => {

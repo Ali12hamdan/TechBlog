@@ -19,9 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
-  title: "TechBlog - Blog",
-});
 definePageMeta({
   validate: async (route) => {
     // Check if the id is made up of digits only
@@ -47,6 +44,10 @@ if (articlesStore.articles.length == 0) {
 const article = ref(articlesStore.getArticleById(Number(route.params.id)));
 if (article.value == undefined)
   throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+useHead({
+  title: "TechBlog - Blog",
+  meta: [{ name: article.value.title, content: article.value.body }],
+});
 </script>
 
 <style scoped>
