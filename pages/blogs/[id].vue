@@ -49,13 +49,16 @@ useHead({
   meta: [
     { hid: "description", name: "description", content: article.value.body },
     { hid: "og:title", property: "og:title", content: article.value.title },
-    //{ hid: "og:url", property: "og:url", content:  },
     {
       hid: "og:description",
       property: "og:description",
       content: article.value.body,
     },
-    //{hid: "og:image",property: "og:image",content: process.env.baseUrl + ogImage,},
+    {
+      hid: "og:image",
+      property: "og:image",
+      content: require(`~/assets/article.png`),
+    },
 
     // telegram card
     {
@@ -63,17 +66,17 @@ useHead({
       name: "telegram:title",
       content: article.value.title,
     },
-    //{ hid: "telegram:url", name: "telegram:url", content:  },
+
     {
       hid: "telegram:description",
       name: "telegram:description",
       content: article.value.body,
     },
-    // // {
-    // //   hid: "telegram:image",
-    // //   name: "telegram:image",
-    // //   content: process.env.baseUrl + ogImage,
-    // // },
+    {
+      hid: "telegram:image",
+      name: "telegram:image",
+      content: require(`~/assets/article.png`),
+    },
   ],
 });
 </script>
