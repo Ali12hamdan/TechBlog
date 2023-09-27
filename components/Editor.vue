@@ -131,7 +131,7 @@ async function sendRequest() {
   border: 4px solid #003366;
 }
 .col {
-  width: 70%;
+  width: 85%;
 }
 header {
   display: flex;
@@ -139,6 +139,7 @@ header {
   border-bottom: 4px solid #003366;
   padding: 1%;
 }
+
 .tab-editor {
   display: flex;
 }
@@ -172,7 +173,7 @@ textarea {
   padding: 5px;
   outline: unset;
   border: unset;
-  font-size: 18px;
+  font-size: medium;
 }
 .alert {
   margin: auto;
@@ -180,5 +181,11 @@ textarea {
   font-size: medium;
   border-left: 0px;
   padding-left: 0px;
+}
+
+@media only screen and (max-width: 500px) {
+  h2 {
+    font-size: large;
+  }
 }
 </style>

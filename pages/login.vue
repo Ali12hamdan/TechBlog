@@ -161,7 +161,17 @@ async function signUp() {
         msg.value = data.value.message;
       }
     } else {
-      msg.value = "Unable to connect to server!!";
+      //For local register
+      //msg.value = "Unable to connect to server!!";
+      //For try deployment only 'fake user'
+      userStore.login({
+        error: false,
+        message: "Register successfully",
+        user: { id: 1, name: "Ali Hamdan", email: "alihamdan@gmail.com" },
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFsaSBIYW1kYW4iLCJlbWFpbCI6ImFsaWhhbWRhbkBnbWFpbC5jb20iLCJpYXQiOjE2OTU2ODAwNTEsImV4cCI6MTY5NjI4NDg1MX0.6mamRT1y4-mkTwZxW3dl50Y1_oIavVFrA0KUa_61c-Y",
+      });
+      router.replace({ name: "index" });
     }
   }
 }
@@ -192,7 +202,17 @@ async function login() {
         msg.value = data.value.message;
       }
     } else {
-      msg.value = "Unable to connect to server!!";
+      //For local register
+      //msg.value = "Unable to connect to server!!";
+      //For try deployment only 'fake user'
+      userStore.login({
+        error: false,
+        message: "Register successfully",
+        user: { id: 1, name: "Ali Hamdan", email: "alihamdan@gmail.com" },
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFsaSBIYW1kYW4iLCJlbWFpbCI6ImFsaWhhbWRhbkBnbWFpbC5jb20iLCJpYXQiOjE2OTU2ODAwNTEsImV4cCI6MTY5NjI4NDg1MX0.6mamRT1y4-mkTwZxW3dl50Y1_oIavVFrA0KUa_61c-Y",
+      });
+      router.replace({ name: "index" });
     }
   }
 }

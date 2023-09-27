@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <h2>{{ getTitle }}</h2>
+    <h1>{{ getTitle }}</h1>
     <div class="tool-bar">
       <ul class="tabs" v-if="login">
         <li class="tab" v-if="isNotProfile">
@@ -59,10 +59,11 @@ onMounted(() => {
   min-width: 350px;
   z-index: 999;
 }
-h2 {
+h1 {
   margin: 0px;
   padding: 8px;
   color: white;
+  font-size: x-large;
 }
 div {
   display: flex;

@@ -5,7 +5,7 @@
     </div>
     <div class="card__content">
       <div class="card__info">
-        <p class="card__title">{{ article.title }}</p>
+        <h3 class="card__title">{{ article.title }}</h3>
         <p class="card__des text--medium">{{ des }}</p>
       </div>
       <div class="card__options" v-if="options">
@@ -183,6 +183,9 @@ const des = computed(() => {
 img {
   height: 75%;
   object-fit: contain;
+}
+h3 {
+  font-size: 16px;
 }
 a {
   text-align: center;

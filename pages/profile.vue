@@ -122,5 +122,8 @@ const userStore = useUserStore();
     height: 76px;
     border-radius: 38px;
   }
+  .create-btn {
+    font-size: small;
+  }
 }
 </style>
