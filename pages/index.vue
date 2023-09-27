@@ -124,7 +124,7 @@ header a button:hover {
 }
 @media only screen and (max-width: 500px) {
   img {
-    height: 235px;
+    height: 210px;
   }
 }
 </style>
