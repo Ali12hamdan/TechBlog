@@ -104,6 +104,7 @@ img {
   border-radius: 17.5px;
 }
 .title {
+  font-size: large;
   font-family: "Open Sans", sans-serif;
   padding: 10px;
 }
@@ -120,6 +121,7 @@ img {
 }
 .writer_header {
   display: flex;
+  font-size: medium;
 }
 .category_header {
   border: 1px solid #004080;
