@@ -43,6 +43,7 @@ h1 {
   color: white;
   height: fit-content;
   margin-bottom: 20px;
+  font-family: cursive;
 }
 
 .box {
@@ -82,6 +83,7 @@ a:hover {
 @media only screen and (max-width: 600px) {
   .box {
     width: 85%;
+    margin-top: 25%;
   }
 }
 </style>
