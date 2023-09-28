@@ -70,8 +70,8 @@ img {
 }
 .row {
   display: flex;
-  width: 100%;
   align-items: center;
+  width: 100%;
   background-color: white;
   border: solid 3px #003366;
   border-radius: 12px;
@@ -117,6 +117,7 @@ header a button:hover {
 @media only screen and (max-width: 1000px) {
   .row {
     display: inline-block;
+    align-items: unset;
   }
   .summary p {
     font-size: medium;
@@ -131,7 +132,8 @@ header a button:hover {
 }
 @media only screen and (max-width: 500px) {
   img {
-    height: 210px;
+    height: fit-content;
+    width: inherit;
   }
 }
 </style>
