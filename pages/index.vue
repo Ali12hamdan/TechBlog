@@ -122,6 +122,12 @@ header a button:hover {
     font-size: medium;
     line-height: 25px;
   }
+  header h2 {
+    font-size: large;
+  }
+  header a button {
+    font-size: small;
+  }
 }
 @media only screen and (max-width: 500px) {
   img {
