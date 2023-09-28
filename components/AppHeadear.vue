@@ -6,7 +6,7 @@
         <li class="tab" v-if="isNotProfile">
           <NuxtLink to="/profile">Profile</NuxtLink>
         </li>
-        <li class="tab" @click="logout">Logout</li>
+        <li class="tab" @click="logout" v-else>Logout</li>
       </ul>
       <div class="login-div" v-else>
         <NuxtLink to="/login">
@@ -75,17 +75,21 @@ div {
   display: flex;
   justify-content: space-between;
   list-style: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
 }
 .tab {
+  border: 2px solid white;
+  padding: 3px 9px 3px 9px;
   margin: 8px;
   cursor: pointer;
+  border-radius: 7px;
 }
 .tab:hover,
 .tab a:hover {
   color: #003366;
+  border-color: #003366;
 }
 .tab a {
   text-decoration: none;
