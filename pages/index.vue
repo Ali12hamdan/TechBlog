@@ -66,6 +66,7 @@ useHead({
 img {
   height: 300px;
   inline-size: auto;
+  border-radius: 12px;
 }
 .row {
   display: flex;

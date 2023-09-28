@@ -36,7 +36,7 @@ main {
   padding: 12px;
   padding-top: 40px;
   width: 100%;
-  height: 25%;
+  height: 20%;
   background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
 }
 h1 {
@@ -78,5 +78,10 @@ a {
 a:hover {
   color: #003366;
   border-bottom: #003366 solid 2px;
+}
+@media only screen and (max-width: 600px) {
+  .box {
+    width: 85%;
+  }
 }
 </style>
