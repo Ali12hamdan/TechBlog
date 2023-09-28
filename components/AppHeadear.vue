@@ -113,4 +113,13 @@ div {
   background-color: #003366;
   color: white;
 }
+
+@media only screen and (max-width: 550px) {
+  h1 {
+    font-size: large;
+  }
+  .tab {
+    font-size: small;
+  }
+}
 </style>
