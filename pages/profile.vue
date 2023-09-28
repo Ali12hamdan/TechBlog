@@ -13,7 +13,7 @@
       </div>
       <div class="edit">
         <NuxtLink to="/content-editor">
-          <button class="create-btn">Create New Content</button>
+          <button class="create-btn">Create Content</button>
         </NuxtLink>
       </div>
     </div>
@@ -96,20 +96,23 @@ const userStore = useUserStore();
 }
 
 @media only screen and (max-width: 750px) {
+  .info-profile {
+    padding: 2.5%;
+  }
   .num-content {
     width: 100%;
     display: grid;
   }
   .img-profile {
-    width: 86px;
-    height: 86px;
-    border-radius: 43px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
   }
   .details-profile h2 {
-    font-size: large;
+    font-size: medium;
   }
   .details-profile h4 {
-    font-size: medium;
+    font-size: small;
   }
 }
 @media only screen and (max-width: 520px) {
@@ -118,10 +121,11 @@ const userStore = useUserStore();
     display: grid;
   }
   .img-profile {
-    width: 76px;
-    height: 76px;
-    border-radius: 38px;
+    width: 68px;
+    height: 68px;
+    border-radius: 34px;
   }
+
   .create-btn {
     font-size: small;
   }
