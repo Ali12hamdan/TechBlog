@@ -9,11 +9,24 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
+});
+onMounted(() => {
+  showAlert();
 });
 onUpdated(() => {
+  showAlert();
+});
+function showAlert() {
   if (props.msg.length > 0) alert.value.style.display = "block";
   else alert.value.style.display = "none";
-});
+  if (props.type == "error") alert.value.style.color = "rgba(255, 0, 0, 0.753)";
+  else if (props.type == "success") alert.value.style.color = "green";
+  else alert.value.style.color = "black";
+}
 </script>
 <style scoped>
 .alert {

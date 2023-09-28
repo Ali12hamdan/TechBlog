@@ -23,7 +23,7 @@
         <button class="create-btn" @click="sendRequest">
           {{ props.type.toUpperCase() }}
         </button>
-        <Alert class="alert" :msg="msg"></Alert>
+        <Alert class="alert" :msg="msg" :type="type_msg"></Alert>
       </div>
     </div>
   </div>
@@ -46,6 +46,7 @@ const user = userStore.user;
 const title = ref("");
 const body = ref("");
 const msg = ref("");
+const type_msg = ref("error");
 
 if (props.type != "create" && props.id) {
   if (articlesStore.getArticles.length == 0) {
@@ -63,6 +64,7 @@ if (props.type != "create" && props.id) {
 }
 
 async function sendRequest() {
+  type_msg.value = "error";
   if (title.value.length < 10) {
     msg.value = "Title must be at least 10 character";
   } else if (body.value.length < 30) {
@@ -85,6 +87,7 @@ async function sendRequest() {
           },
           onResponse({ request, response, options }) {
             msg.value = "The article was created successfully";
+            type_msg.value = "success";
           },
           onResponseError() {
             msg.value = "Create Response Error!!";
@@ -107,6 +110,7 @@ async function sendRequest() {
             },
             onResponse({ request, response, options }) {
               msg.value = "The article was edited successfully";
+              type_msg.value = "success";
             },
             onResponseError() {
               msg.value = "Edit Response Error!!";

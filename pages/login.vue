@@ -84,7 +84,7 @@
             </div>
           </form>
         </div>
-        <Alert :msg="msg" />
+        <Alert type="error" :msg="msg" />
       </div>
     </div>
   </main>
