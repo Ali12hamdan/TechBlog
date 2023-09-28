@@ -43,7 +43,7 @@ h1 {
   color: white;
   height: fit-content;
   margin-bottom: 20px;
-  font-family: cursive;
+  font-family: "Open Sans", sans-serif;
 }
 
 .box {
@@ -66,7 +66,7 @@ img {
 p {
   margin-top: 15px;
   margin-bottom: 15px;
-  font-family: cursive;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
