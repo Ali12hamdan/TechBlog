@@ -3,12 +3,19 @@
     <header>
       <h2>Editor</h2>
       <div class="tab-editor">
-        <select>
-          <option selected>Category</option>
-          <option>Android</option>
-          <option>Web</option>
-          <option>AI</option>
-          <option>Games</option>
+        <div class="type-privacy">
+          <input
+            style="vertical-align: middle"
+            type="checkbox"
+            id="onlyMember"
+            v-model="privateArticle"
+          />
+          <label style="margin-left: 3px" for="onlyMember">Private</label>
+        </div>
+        <select v-model="selectedOption">
+          <option v-for="option in options" :value="option.value">
+            {{ option.name }}
+          </option>
         </select>
       </div>
     </header>
@@ -45,6 +52,15 @@ const userStore = useUserStore();
 const user = userStore.user;
 const title = ref("");
 const body = ref("");
+const options = ref([
+  { value: "none", name: "None" },
+  { value: "android", name: "Android" },
+  { value: "web", name: "Web" },
+  { value: "ai", name: "AI" },
+  { value: "games", name: "Games" },
+]);
+const selectedOption = ref("none");
+const privateArticle = ref(false);
 const msg = ref("");
 const type_msg = ref("error");
 
@@ -69,12 +85,16 @@ async function sendRequest() {
     msg.value = "Title must be at least 10 character";
   } else if (body.value.length < 30) {
     msg.value = "Article body must be at least 30 character";
+  } else if (selectedOption.value == "none") {
+    msg.value = "Please select category";
   } else {
     let req: Article = {
       id: 1,
       title: title.value,
       body: body.value,
       userId: user.id,
+      // category: selectedOption
+      // type: typeArticle
     };
     if (props.type == "create") {
       const { data } = await useFetch<Article>(
@@ -146,6 +166,15 @@ header {
 
 .tab-editor {
   display: flex;
+}
+.type-privacy {
+  border: 1px solid rgb(124, 115, 115);
+  align-self: center;
+  margin-right: 7px;
+  padding: 7px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: small;
 }
 .box-editor {
   text-align: center;
